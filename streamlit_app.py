@@ -31,7 +31,7 @@ IMAGES = [
 ]
 
 import streamlit as st
-from streamlit_image_carousel import image_carousel
+from streamlit.components.v1 import html
 import base64
 
 def show_carousel_of_photos(photos_list):
@@ -54,7 +54,41 @@ def show_carousel_of_photos(photos_list):
             image_bytes = base64.b64encode(f.read()).decode()
         image_list.append(image_bytes)
     
-    # Display the carousel using the image_carousel function from streamlit-image-carousel
-    image_carousel(image_list, height=300)
-    
-    show_carousel_of_photos(IMAGES)
+    # Display the carousel using HTML and JavaScript
+    html_code = f"""
+        <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                {% for i, image in enumerate(image_list) %}
+                    <div class="carousel-item {% if i == 0 %}active{% endif %}">
+                        <img src="data:image;base64,{{ image }}" class="d-block w-100">
+                    </div>
+                {% endfor %}
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+        
+        <style>
+            .carousel-inner img {
+                object-fit: contain;
+                height: 300px;
+            }
+        </style>
+        
+        <script>
+            new bootstrap.Carousel(document.getElementById('myCarousel'), {
+              interval: 2000,
+              wrap: true
+            })
+        </script>
+    """
+    html(html_code, height=350)
+
+
+show_carousel_of_photos(IMAGES)
