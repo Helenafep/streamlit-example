@@ -34,6 +34,10 @@ import streamlit as st
 from streamlit.components.v1 import html
 import base64
 
+import streamlit as st
+from streamlit.components.v1 import html
+import base64
+
 def show_carousel_of_photos(photos_list):
     """
     A function that takes a list of photos and displays them in a carousel.
@@ -55,14 +59,10 @@ def show_carousel_of_photos(photos_list):
         image_list.append(image_bytes)
     
     # Display the carousel using HTML and JavaScript
-    html_code = f"""
+    html_code = """
         <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
-                {% for i, image in enumerate(image_list) %}
-                    <div class="carousel-item {% if i == 0 %}active{% endif %}">
-                        <img src="data:image;base64,{{ image }}" class="d-block w-100">
-                    </div>
-                {% endfor %}
+                {}
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -87,8 +87,13 @@ def show_carousel_of_photos(photos_list):
               wrap: true
             })
         </script>
-    """
+    """.format("".join([f"""
+                    <div class="carousel-item {'active' if i == 0 else ''}">
+                        <img src="data:image;base64,{image}" class="d-block w-100">
+                    </div>
+                """ for i, image in enumerate(image_list)]))
     html(html_code, height=350)
+
 
 
 show_carousel_of_photos(IMAGES)
