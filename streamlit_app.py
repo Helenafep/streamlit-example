@@ -33,6 +33,11 @@ IMAGES = [
 import streamlit as st
 import streamlit.components.v1 as components
 st.map(df, use_container_width=True)
+
+import streamlit as st
+from streamlit_cropper import st_cropper
+import base64
+
 def show_carousel_of_photos(photos_list):
     """
     A function that takes a list of photos and displays them in a carousel.
@@ -46,56 +51,25 @@ def show_carousel_of_photos(photos_list):
         st.warning("No photos to display.")
         return
     
-    # Generate HTML code for the carousel using the streamlit-components library
-    carousel_code = """
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-            {}
-        </ol>
-        <div class="carousel-inner">
-            {}
-        </div>
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
-    </div>
-    """
-    
-    # Generate HTML code for the carousel indicators and items
-    indicators_code = ""
-    items_code = ""
-    for i, photo in enumerate(photos_list):
-        indicators_code += f'<li data-target="#carouselExampleIndicators" data-slide-to="{i}" class=""></li>'
-        active = "active" if i == 0 else ""
-        items_code += f'<div class="carousel-item {active}"><img src="{photo}" class="d-block w-100" alt="Photo {i+1}"></div>'
-    
-    st.map(df, use_container_width=True)
-    # Combine the HTML code for the carousel
-    carousel_html = carousel_code.format(indicators_code, items_code)
-    st.map(df, use_container_width=True)
-    # Display the carousel using the components.html function from streamlit-components
-    components.html(carousel_html, height=500)
+    # Loop through the list of photos and display each photo in a carousel
+    for photo in photos_list:
+        # Convert the photo to base64 encoding
+        with open(photo, "rb") as f:
+            image_bytes = base64.b64encode(f.read()).decode()
+        # Display the photo in a cropper widget
+        st_cropper(image_bytes, width=500, height=300)
+show_carousel_of_photos(IMAGES)
 
-    
-    import pandas as pd
-    import requests
+st.map(df, use_container_width=False)
 
-    st.map(df, use_container_width=True)
-    st.map(df, use_container_width=False)
-    
-    for curr_point_num in range(total_points):
-        curr_turn, i = divmod(curr_point_num, points_per_turn)
-        angle = (curr_turn + 1) * 2 * math.pi * i / points_per_turn
-        radius = curr_point_num / total_points
-        x = radius * math.cos(angle)
-        y = radius * math.sin(angle)
-        data.append(Point(x, y))
+for curr_point_num in range(total_points):
+    curr_turn, i = divmod(curr_point_num, points_per_turn)
+    angle = (curr_turn + 1) * 2 * math.pi * i / points_per_turn
+    radius = curr_point_num / total_points
+    x = radius * math.cos(angle)
+    y = radius * math.sin(angle)
+    data.append(Point(x, y))
 
-    st.altair_chart(alt.Chart(pd.DataFrame(data), height=500, width=500)
-        .mark_circle(color='#0068c9', opacity=0.5)
-        .encode(x='x:Q', y='y:Q'))
+st.altair_chart(alt.Chart(pd.DataFrame(data), height=500, width=500)
+    .mark_circle(color='#0068c9', opacity=0.5)
+    .encode(x='x:Q', y='y:Q'))
