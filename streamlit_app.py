@@ -35,7 +35,7 @@ with st.echo(code_location='below'):
     print(df)
 
     st.map(df, use_container_width=True)
-    st.map(df, use_container_width=True)
+    st.map(df, use_container_width=False)
     
     for curr_point_num in range(total_points):
         curr_turn, i = divmod(curr_point_num, points_per_turn)
