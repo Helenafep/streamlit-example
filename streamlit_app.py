@@ -7,9 +7,11 @@ import json
 
 
 # Read CSV file into a pandas DataFrame
+import ast
+row = 1
 df = pd.read_csv("./my_data.csv")
-imgs = df['images'][0]
-for image_file in imgs:
-    st.image(image_file, caption=image_file, use_column_width=True)
+url = ast.literal_eval(df['images'][row])
+for u in url:
+    st.image(u)
     
 
