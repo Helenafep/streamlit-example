@@ -26,7 +26,7 @@ st.image('https://restb-hackathon.s3.amazonaws.com/real_estate_dataset/images/30
 st.image("https://unsplash.com/photos/GJ8ZQV7eGmU/download?force=true&w=1920")
 IMAGES = [
     'https://restb-hackathon.s3.amazonaws.com/real_estate_dataset/images/303464__013.jpg',
-    "https://unsplash.com/photos/GJ8ZQV7eGmU/download?force=true&w=1920",
+    'https://unsplash.com/photos/GJ8ZQV7eGmU/download?force=true&w=1920',
 ]
 
 import streamlit as st
