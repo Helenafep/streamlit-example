@@ -30,6 +30,26 @@ IMAGES = [
     "https://unsplash.com/photos/E4bmf8BtIBE/download?ixid=MnwxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNjUyOTEzMzAw&force=true&w=1920",
 ]
 
+import streamlit as st
+from streamlit_carousel import st_carousel
+
+def show_carousel_of_photos(photos_list):
+    """
+    A function that takes a list of photos and displays them in a carousel.
+    
+    Parameters:
+        photos_list (list): A list of photo file paths or URLs.
+    """
+    
+    # Check if photos_list is empty
+    if not photos_list:
+        st.warning("No photos to display.")
+        return
+    
+    # Display the carousel of photos using the st_carousel function from streamlit_carousel
+    st_carousel(photos_list)
+  
+show_carousel_of_photos(IMAGES)
 st.image('https://restb-hackathon.s3.amazonaws.com/real_estate_dataset/images/303464__013.jpg')
 
 with st.echo(code_location='below'):
