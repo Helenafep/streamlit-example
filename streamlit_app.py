@@ -33,6 +33,26 @@ with st.echo(code_location='below'):
         [np.array([41.3887900,2.1589900])],
         columns=['lat', 'lon'])
     print(df)
+    
+    import pandas as pd
+    import requests
+
+    json = requests.get(DATA_URL).json()
+    df = pd.DataFrame(json["features"][0]["geometry"]["coordinates"])
+    df.columns = ['lng', 'lat']
+
+    viewport = pdk.data_utils.compute_view(df[['lng', 'lat']])
+    layer = pdk.Layer(
+        'ScreenGridLayer',
+        df,
+        cell_size_pixels=20,
+        color_range=COLOR_RANGE,
+        get_position='[lng, lat]',
+        pickable=True,
+        auto_highlight=True)
+    r = pdk.Deck(layers=[layer], initial_view_state=viewport)
+    r.show()
+    pd.DataFrame([r.deck_widget.selected_data])
 
     st.map(df, use_container_width=True)
     st.map(df, use_container_width=False)
