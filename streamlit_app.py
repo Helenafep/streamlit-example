@@ -15,6 +15,15 @@ forums](https://discuss.streamlit.io).
 In the meantime, below is an example of what you can do with just a few lines of code:
 """
 
+import json
+import pandas as pd
+
+!wget https://restb-hackathon.s3.amazonaws.com/real_estate_dataset/hackupc2023_restbai__dataset.zip
+!unzip /content/hackupc2023_restbai__dataset.zip
+with open('/content/hackupc2023_restbai__dataset/hackupc2023_restbai__dataset_sample.json') as f:
+    data = json.load(f)
+
+df = pd.DataFrame(data).T
 
 with st.echo(code_location='below'):
     total_points = st.slider("Number of points in spiral", 1, 5000, 2000)
