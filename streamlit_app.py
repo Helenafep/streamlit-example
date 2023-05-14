@@ -18,9 +18,7 @@ In the meantime, below is an example of what you can do with just a few lines of
 import json
 import pandas as pd
 
-!wget https://restb-hackathon.s3.amazonaws.com/real_estate_dataset/hackupc2023_restbai__dataset.zip
-!unzip /content/hackupc2023_restbai__dataset.zip
-with open('/content/hackupc2023_restbai__dataset/hackupc2023_restbai__dataset_sample.json') as f:
+with open('https://github.com/Helenafep/streamlit-example/blob/master/streamlit_app.py#:~:text=README.md-,hackupc2023_restbai__dataset_sample,-.json') as f:
     data = json.load(f)
 
 df = pd.DataFrame(data).T
