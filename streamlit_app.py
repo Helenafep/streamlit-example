@@ -28,18 +28,12 @@ IMAGES = [
     'https://unsplash.com/photos/GJ8ZQV7eGmU/download?force=true&w=1920',
     'https://unsplash.com/photos/GJ8ZQV7eGmU/download?force=true&w=1920',
 ]
-
 import streamlit as st
-from streamlit.components.v1 import html
-import base64
+from PIL import Image
 
-import streamlit as st
-from streamlit.components.v1 import html
-import base64
-
-def show_carousel_of_photos(photos_list):
+def show_photos(photos_list):
     """
-    A function that takes a list of photos and displays them in a carousel.
+    A function that takes a list of photos and displays them in a grid.
     
     Parameters:
         photos_list (list): A list of photo file paths or URLs.
@@ -50,49 +44,14 @@ def show_carousel_of_photos(photos_list):
         st.warning("No photos to display.")
         return
     
-    # Loop through the list of photos and convert each photo to base64 encoding
-    image_list = []
+    # Loop through the list of photos and display each photo in a grid
     for photo in photos_list:
-        with open(photo, "rb") as f:
-            image_bytes = base64.b64encode(f.read()).decode()
-        image_list.append(image_bytes)
-    
-    # Display the carousel using HTML and JavaScript
-    html_code = """
-        <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                {}
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
-        
-        <style>
-            .carousel-inner img {
-                object-fit: contain;
-                height: 300px;
-            }
-        </style>
-        
-        <script>
-            new bootstrap.Carousel(document.getElementById('myCarousel'), {
-              interval: 2000,
-              wrap: true
-            })
-        </script>
-    """.format("".join([f"""
-                    <div class="carousel-item {'active' if i == 0 else ''}">
-                        <img src="data:image;base64,{image}" class="d-block w-100">
-                    </div>
-                """ for i, image in enumerate(image_list)]))
-    html(html_code, height=350)
+        try:
+            image = Image.open(photo)
+            st.image(image, caption=photo)
+        except Exception as e:
+            st.warning(f"Could not display {photo}. {str(e)}")
 
 
 
-show_carousel_of_photos(IMAGES)
+show_photos(IMAGES)
