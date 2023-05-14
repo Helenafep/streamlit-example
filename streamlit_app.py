@@ -5,7 +5,7 @@ import pandas as pd
 import streamlit as st
 import json
 import pandas as pd
-from streamlit_elements import elements, mui, html, sync
+from streamlit_elements import elements, html, sync
 
 def slideshow_swipeable(images):
     # Generate a session state key based on images.
