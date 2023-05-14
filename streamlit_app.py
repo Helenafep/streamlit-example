@@ -26,8 +26,7 @@ for image_file in IMAGES:
     st.image(image_file, caption=image_file, use_column_width=True)
     
 df = pd.DataFrame(data).T
-st.image('https://restb-hackathon.s3.amazonaws.com/real_estate_dataset/images/303464__013.jpg')
-st.image("https://unsplash.com/photos/GJ8ZQV7eGmU/download?force=true&w=1920")
+
 
 
 
