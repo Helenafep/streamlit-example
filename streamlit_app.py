@@ -3,6 +3,9 @@ import altair as alt
 import math
 import pandas as pd
 import streamlit as st
+import json
+import pandas as pd
+from streamlit_elements import elements, mui, html, sync
 
 def slideshow_swipeable(images):
     # Generate a session state key based on images.
@@ -54,10 +57,6 @@ forums](https://discuss.streamlit.io).
 
 In the meantime, below is an example of what you can do with just a few lines of code:
 """
-
-import json
-import pandas as pd
-from streamlit_elements import elements, mui, html, sync
 
 with open('./hackupc2023_restbai__dataset_sample.json') as f:
     data = json.load(f)
