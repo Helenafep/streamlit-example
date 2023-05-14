@@ -22,7 +22,7 @@ with open('./hackupc2023_restbai__dataset_sample.json') as f:
     data = json.load(f)
 
 df = pd.DataFrame(data).T
-st.image(df.iloc[0, 'images'])
+st.image('https://restb-hackathon.s3.amazonaws.com/real_estate_dataset/images/303464__013.jpg')
 
 with st.echo(code_location='below'):
     total_points = st.slider("Number of points in spiral", 1, 5000, 2000)
