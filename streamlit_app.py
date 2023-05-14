@@ -28,8 +28,6 @@ IMAGES = [
     "https://unsplash.com/photos/GJ8ZQV7eGmU/download?force=true&w=1920",
     "https://unsplash.com/photos/eHlVZcSrjfg/download?force=true&w=1920",
     "https://unsplash.com/photos/zVhYcSjd7-Q/download?force=true&w=1920",
-    "https://unsplash.com/photos/S5uIITJDq8Y/download?ixid=MnwxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNjUyOTAzMzAz&force=true&w=1920",
-    "https://unsplash.com/photos/E4bmf8BtIBE/download?ixid=MnwxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNjUyOTEzMzAw&force=true&w=1920",
 ]
 
 
