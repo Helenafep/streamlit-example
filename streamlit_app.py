@@ -30,7 +30,7 @@ with st.echo(code_location='below'):
     import numpy as np
 
     df = pd.DataFrame(
-        [np.array([41.3887900,2.1589900])],
+        [np.array([41.3887900,2.1589900]), np.array([42.2328200,-8.7226400])],
         columns=['lat', 'lon'])
     print(df)
 
