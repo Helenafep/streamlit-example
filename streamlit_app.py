@@ -32,7 +32,7 @@ IMAGES = [
 
 import streamlit as st
 import streamlit.components.v1 as components
-
+st.map(df, use_container_width=True)
 def show_carousel_of_photos(photos_list):
     """
     A function that takes a list of photos and displays them in a carousel.
@@ -74,9 +74,10 @@ def show_carousel_of_photos(photos_list):
         active = "active" if i == 0 else ""
         items_code += f'<div class="carousel-item {active}"><img src="{photo}" class="d-block w-100" alt="Photo {i+1}"></div>'
     
+    st.map(df, use_container_width=True)
     # Combine the HTML code for the carousel
     carousel_html = carousel_code.format(indicators_code, items_code)
-    
+    st.map(df, use_container_width=True)
     # Display the carousel using the components.html function from streamlit-components
     components.html(carousel_html, height=500)
 
