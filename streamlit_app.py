@@ -31,7 +31,7 @@ IMAGES = [
 ]
 
 import streamlit as st
-from streamlit_carousel import st_carousel
+import streamlit.components.v1 as components
 
 def show_carousel_of_photos(photos_list):
     """
@@ -46,29 +46,40 @@ def show_carousel_of_photos(photos_list):
         st.warning("No photos to display.")
         return
     
-    # Display the carousel of photos using the st_carousel function from streamlit_carousel
-    st_carousel(photos_list)
-  
-show_carousel_of_photos(IMAGES)
-st.image('https://restb-hackathon.s3.amazonaws.com/real_estate_dataset/images/303464__013.jpg')
-
-with st.echo(code_location='below'):
-    total_points = st.slider("Number of points in spiral", 1, 5000, 2000)
-    num_turns = st.slider("Esto es una puta basura", 1, 100, 9)
-
-    Point = namedtuple('Point', 'x y')
-    data = []
-
-    points_per_turn = total_points / num_turns
+    # Generate HTML code for the carousel using the streamlit-components library
+    carousel_code = """
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            {}
+        </ol>
+        <div class="carousel-inner">
+            {}
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+    """
     
-    import streamlit as st
-    import pandas as pd
-    import numpy as np
+    # Generate HTML code for the carousel indicators and items
+    indicators_code = ""
+    items_code = ""
+    for i, photo in enumerate(photos_list):
+        indicators_code += f'<li data-target="#carouselExampleIndicators" data-slide-to="{i}" class=""></li>'
+        active = "active" if i == 0 else ""
+        items_code += f'<div class="carousel-item {active}"><img src="{photo}" class="d-block w-100" alt="Photo {i+1}"></div>'
+    
+    # Combine the HTML code for the carousel
+    carousel_html = carousel_code.format(indicators_code, items_code)
+    
+    # Display the carousel using the components.html function from streamlit-components
+    components.html(carousel_html, height=500)
 
-    df = pd.DataFrame(
-        [np.array([41.3887900,2.1589900])],
-        columns=['lat', 'lon'])
-    print(df)
     
     import pandas as pd
     import requests
