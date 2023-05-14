@@ -32,11 +32,6 @@ IMAGES = [
     "https://unsplash.com/photos/E4bmf8BtIBE/download?ixid=MnwxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNjUyOTEzMzAw&force=true&w=1920",
 ]
 
-import streamlit as st
-from streamlit_cropper import st_cropper
-import base64
-
-show_carousel_of_photos(IMAGES)
 
 st.map(df, use_container_width=False)
 
