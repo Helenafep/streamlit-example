@@ -22,6 +22,7 @@ with open('./hackupc2023_restbai__dataset_sample.json') as f:
     data = json.load(f)
 
 df = pd.DataFrame(data).T
+st.image('https://restb-hackathon.s3.amazonaws.com/real_estate_dataset/images/303464__013.jpg')
 IMAGES = [
     "https://unsplash.com/photos/GJ8ZQV7eGmU/download?force=true&w=1920",
     "https://unsplash.com/photos/eHlVZcSrjfg/download?force=true&w=1920",
@@ -34,26 +35,6 @@ import streamlit as st
 from streamlit_cropper import st_cropper
 import base64
 
-def show_carousel_of_photos(photos_list):
-    """
-    A function that takes a list of photos and displays them in a carousel.
-    
-    Parameters:
-        photos_list (list): A list of photo file paths or URLs.
-    """
-    
-    # Check if photos_list is empty
-    if not photos_list:
-        st.warning("No photos to display.")
-        return
-    
-    # Loop through the list of photos and display each photo in a carousel
-    for photo in photos_list:
-        # Convert the photo to base64 encoding
-        with open(photo, "rb") as f:
-            image_bytes = base64.b64encode(f.read()).decode()
-        # Display the photo in a cropper widget
-        st_cropper(image_bytes, width=500, height=300)
 show_carousel_of_photos(IMAGES)
 
 st.map(df, use_container_width=False)
