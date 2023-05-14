@@ -24,6 +24,16 @@ with st.echo(code_location='below'):
     data = []
 
     points_per_turn = total_points / num_turns
+    
+    import streamlit as st
+    import pandas as pd
+    import numpy as np
+
+    df = pd.DataFrame(
+        [2.1589900,41.3887900]
+        columns=['lat', 'lon'])
+
+    st.map(df)
 
     for curr_point_num in range(total_points):
         curr_turn, i = divmod(curr_point_num, points_per_turn)
