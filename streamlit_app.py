@@ -7,7 +7,7 @@ import json
 
 
 # Read CSV file into a pandas DataFrame
-df = pd.read_csv("data.csv")
+df = pd.read_csv("./my_data.csv")
 
 IMAGES = [
     'https://restb-hackathon.s3.amazonaws.com/real_estate_dataset/images/303464__013.jpg',
