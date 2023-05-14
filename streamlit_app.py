@@ -31,10 +31,6 @@ IMAGES = [
 ]
 
 import streamlit as st
-import streamlit.components.v1 as components
-st.map(df, use_container_width=True)
-
-import streamlit as st
 from streamlit_cropper import st_cropper
 import base64
 
