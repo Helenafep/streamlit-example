@@ -18,7 +18,7 @@ In the meantime, below is an example of what you can do with just a few lines of
 import json
 import pandas as pd
 
-with open('hackupc2023_restbai__dataset_sample') as f:
+with open('./hackupc2023_restbai__dataset_sample') as f:
     data = json.load(f)
 
 df = pd.DataFrame(data).T
