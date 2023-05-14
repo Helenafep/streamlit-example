@@ -30,7 +30,7 @@ with st.echo(code_location='below'):
     import numpy as np
 
     df = pd.DataFrame(
-        [2.1589900,41.3887900],
+        np.random.randn(1000, 2) / [50, 50] + [37.76, -122.4],
         columns=['lat', 'lon'])
 
     st.map(df)
