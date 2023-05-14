@@ -29,3 +29,32 @@ IMAGES = [
     "https://unsplash.com/photos/eHlVZcSrjfg/download?force=true&w=1920",
     "https://unsplash.com/photos/zVhYcSjd7-Q/download?force=true&w=1920",
 ]
+
+import streamlit as st
+from streamlit_image_carousel import image_carousel
+import base64
+
+def show_carousel_of_photos(photos_list):
+    """
+    A function that takes a list of photos and displays them in a carousel.
+    
+    Parameters:
+        photos_list (list): A list of photo file paths or URLs.
+    """
+    
+    # Check if photos_list is empty
+    if not photos_list:
+        st.warning("No photos to display.")
+        return
+    
+    # Loop through the list of photos and convert each photo to base64 encoding
+    image_list = []
+    for photo in photos_list:
+        with open(photo, "rb") as f:
+            image_bytes = base64.b64encode(f.read()).decode()
+        image_list.append(image_bytes)
+    
+    # Display the carousel using the image_carousel function from streamlit-image-carousel
+    image_carousel(image_list, height=300)
+    
+    show_carousel_of_photos(IMAGES)
