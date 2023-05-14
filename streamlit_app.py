@@ -37,10 +37,6 @@ with st.echo(code_location='below'):
     import pandas as pd
     import requests
 
-    json = requests.get(DATA_URL).json()
-    df = pd.DataFrame(json["features"][0]["geometry"]["coordinates"])
-    df.columns = ['lng', 'lat']
-
     viewport = pdk.data_utils.compute_view(df[['lng', 'lat']])
     layer = pdk.Layer(
         'ScreenGridLayer',
