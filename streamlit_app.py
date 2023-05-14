@@ -37,19 +37,6 @@ with st.echo(code_location='below'):
     import pandas as pd
     import requests
 
-    viewport = pdk.data_utils.compute_view(df[['lat', 'lon']])
-    layer = pdk.Layer(
-        'ScreenGridLayer',
-        df,
-        cell_size_pixels=20,
-        color_range=COLOR_RANGE,
-        get_position='[lng, lat]',
-        pickable=True,
-        auto_highlight=True)
-    r = pdk.Deck(layers=[layer], initial_view_state=viewport)
-    r.show()
-    pd.DataFrame([r.deck_widget.selected_data])
-
     st.map(df, use_container_width=True)
     st.map(df, use_container_width=False)
     
