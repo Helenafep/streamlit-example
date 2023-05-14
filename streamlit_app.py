@@ -37,7 +37,7 @@ with st.echo(code_location='below'):
     import pandas as pd
     import requests
 
-    viewport = pdk.data_utils.compute_view(df[['lng', 'lat']])
+    viewport = pdk.data_utils.compute_view(df[['lat', 'lon']])
     layer = pdk.Layer(
         'ScreenGridLayer',
         df,
